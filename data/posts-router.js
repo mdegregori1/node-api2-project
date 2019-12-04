@@ -51,7 +51,6 @@ router.get('/:id', (req, res) => {
         res.status(500).json( { error: "The post information could not be retrieved." })
     })
 })
-
 //GET	/api/posts/:id/comments
 router.get('/:id/comments', (req, res) => {
     const id = req.params.id;
@@ -68,7 +67,6 @@ router.get('/:id/comments', (req, res) => {
         res.status(500).json({ error: "The comments information could not be retrieved." })
     })
 })
-
 // DELETE	/api/posts/:id
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
@@ -85,7 +83,6 @@ router.delete('/:id', (req, res) => {
         res.status(500).json({ error: "The post could not be removed" })
     })
 })
-
 
 // PUT	/api/posts/:id
 router.put('/:id', (req, res) => {
@@ -110,13 +107,12 @@ router.put('/:id', (req, res) => {
     
 })
 
-
 router.post('/:id/comments', (req, res) => {
     const text = req.body.text;
     const id = req.params.id;
 
     if (text) {
-      db.findById(req.params.id)
+      db.findById(id)
         .then(post => {
           if (post.length === 0) {
             res.status(404).json({ message: "The post with the specified ID does not exist." });
@@ -139,8 +135,5 @@ router.post('/:id/comments', (req, res) => {
       res.status(400).json({ errorMessage: "Please provide text for the comment." });
     }
   });
-
-
-
 
 module.exports = router;
